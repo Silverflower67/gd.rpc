@@ -40,5 +40,5 @@ setup(
         "Natural Language :: English",
         "Operating System :: OS Independent",
     ],
-    entry_points={"run": ["gd.rpc = gdrpc:run"]},
+    entry_points={"console_scripts": ["gd.rpc = gdrpc:run"]},
 )
