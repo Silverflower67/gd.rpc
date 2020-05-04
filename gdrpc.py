@@ -3,7 +3,7 @@ import datetime
 import gd
 import pypresence
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 
 def get_timestamp() -> int:
@@ -47,10 +47,13 @@ def parse_difficulty(level: gd.typing.Optional[gd.Level]) -> str:
 
 @gd.tasks.loop(seconds=1, loop=LOOP)
 async def main_loop() -> None:
+    global START
+
     try:
         memory.reload()
 
     except RuntimeError:
+        START = get_timestamp()
         await presence.clear()
         return
 
