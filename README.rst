@@ -27,6 +27,10 @@ gd.rpc
 
 gd.rpc is a library that implements GD Discord RPC in Python.
 
+.. image:: https://github.com/NeKitDS/gd.rpc/showcase.png
+    :target: https://github.com/NeKitDS/gd.rpc/showcase.png
+    :alt: Discord Example
+
 Installing
 ----------
 

@@ -3,7 +3,7 @@ import datetime
 import gd
 import pypresence
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 
 def get_timestamp() -> int:
@@ -112,6 +112,8 @@ async def connect() -> None:
 
 
 def run() -> None:
+
+    print("Running... Press [Ctrl + C] to stop.")
 
     LOOP.run_until_complete(connect())
 
