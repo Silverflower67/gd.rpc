@@ -113,7 +113,7 @@ async def connect() -> None:
 
 def run() -> None:
 
-    print("Running... Press [Ctrl + C] to stop.")
+    print(f"Running gd.rpc v.{__version__}... Press [Ctrl + C] to stop.")
 
     LOOP.run_until_complete(connect())
 
