@@ -72,6 +72,17 @@ Or run a console command:
 
     $ gd.rpc
 
+Building
+--------
+
+You can build an executable file from the ``gdrpc.py`` file using *pyinstaller*:
+
+.. code:: sh
+
+    $ pyinstaller --onefile --icon=gdrpc.ico gdrpc.py
+
+Generated executable will be in ``./dist`` folder.
+
 Authors
 -------
 
