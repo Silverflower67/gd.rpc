@@ -3,7 +3,7 @@ import datetime
 import gd
 import pypresence
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 
 def get_timestamp() -> int:
@@ -62,36 +62,40 @@ async def main_loop() -> None:
     editor_object_count = memory.get_object_count()
     level_id = memory.get_level_id()
     level_name = memory.get_level_name()
+    level_creator = memory.get_level_creator()
     level_type = memory.get_level_type()
     level = None
 
     if level_type == gd.memory.LevelType.NULL:
+
         if memory.is_in_editor():
-            state = f"In Editor ({editor_object_count} objects)"
             details = "Editing level"
+            state = f"{editor_object_count} objects"
 
         else:
-            state = f"In {scene}"
-            details = MESSAGES.get(scene, "Unknown")
+            details = MESSAGES.get(scene)
+            state = None
 
     else:
-        state = f"{level_name} ({best_record}% best) [ID: {level_id}]"
 
         if level_type == gd.memory.LevelType.OFFICIAL:
             level = gd.Level.official(level_id, client=client)
-            details = "Playing official level"
+            level_creator = "RobTop"
+            typeof = "official"
 
         elif level_type == gd.memory.LevelType.EDITOR:
             level = gd.Level(client=client)
-            details = "Playtesting level"
+            typeof = "editor"
 
         else:
+            typeof = "online"
             try:
                 level = await client.get_level(level_id, get_data=False)
             except gd.ClientException:
                 pass
 
-            details = "Playing online level"
+        details = f"{level_name} ({typeof})"
+        state = f"by {level_creator} ({best_record}%)"
 
     difficulty = parse_difficulty(level)
 
