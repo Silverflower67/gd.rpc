@@ -3,7 +3,7 @@ import datetime
 import gd
 import pypresence
 
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 
 def get_timestamp() -> int:
@@ -63,6 +63,8 @@ async def main_loop() -> None:
     level_id = memory.get_level_id()
     level_name = memory.get_level_name()
     level_creator = memory.get_level_creator()
+    level_difficulty = memory.get_level_difficulty()
+    level_stars = memory.get_level_stars()
     level_type = memory.get_level_type()
     level = None
 
@@ -75,6 +77,9 @@ async def main_loop() -> None:
         else:
             details = MESSAGES.get(scene)
             state = None
+
+        small_image = None
+        small_text = None
 
     else:
 
@@ -97,7 +102,8 @@ async def main_loop() -> None:
         details = f"{level_name} ({typeof})"
         state = f"by {level_creator} ({best_record}%)"
 
-    difficulty = parse_difficulty(level)
+        small_image = parse_difficulty(level)
+        small_text = f"{level_stars}* {level_difficulty}"
 
     await presence.update(
         pid=memory.process_id,
@@ -106,8 +112,8 @@ async def main_loop() -> None:
         start=START,
         large_image="gd",
         large_text="gd.rpc",
-        small_image=difficulty,
-        small_text=difficulty,
+        small_image=small_image,
+        small_text=small_text,
     )
 
 
