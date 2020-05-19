@@ -1,4 +1,4 @@
-import datetime
+import time
 
 import gd
 import pypresence
@@ -7,7 +7,7 @@ __version__ = "0.1.6"
 
 
 def get_timestamp() -> int:
-    return int(datetime.datetime.now().timestamp())
+    return int(time.time())
 
 
 CLIENT_ID = 704721375050334300
@@ -60,6 +60,7 @@ async def main_loop() -> None:
     scene = memory.get_scene()
     best_record = memory.get_normal_percent()
     editor_object_count = memory.get_object_count()
+    editor_level_name = memory.get_editor_level_name()
     level_id = memory.get_level_id()
     level_name = memory.get_level_name()
     level_creator = memory.get_level_creator()
@@ -72,7 +73,7 @@ async def main_loop() -> None:
 
         if memory.is_in_editor():
             details = "Editing level"
-            state = f"{editor_object_count} objects"
+            state = f"{editor_level_name} ({editor_object_count} objects)"
 
         else:
             details = MESSAGES.get(scene)
