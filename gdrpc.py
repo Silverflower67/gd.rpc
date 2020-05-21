@@ -3,7 +3,7 @@ import time
 import gd
 import pypresence
 
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 
 
 def get_timestamp() -> int:
@@ -30,11 +30,11 @@ memory = gd.memory.Memory(GD_PROCESS)
 presence = pypresence.AioPresence(str(CLIENT_ID), loop=LOOP)
 
 
-def parse_difficulty(level: gd.typing.Optional[gd.Level]) -> str:
-    if level is None:
-        return "na"
-
-    parts = level.difficulty.name.lower().split("_")
+def get_image(
+    difficulty: gd.typing.Union[gd.DemonDifficulty, gd.LevelDifficulty],
+    level: gd.Level,
+) -> str:
+    parts = difficulty.name.lower().split("_")
 
     if level.is_epic():
         parts.append("epic")
@@ -57,17 +57,23 @@ async def main_loop() -> None:
         await presence.clear()
         return
 
+    name = memory.get_user_name()
+
+    if not name:
+        name = "Player"
+
     scene = memory.get_scene()
     best_record = memory.get_normal_percent()
+
     editor_object_count = memory.get_object_count()
     editor_level_name = memory.get_editor_level_name()
+
     level_id = memory.get_level_id()
     level_name = memory.get_level_name()
     level_creator = memory.get_level_creator()
     level_difficulty = memory.get_level_difficulty()
     level_stars = memory.get_level_stars()
     level_type = memory.get_level_type()
-    level = None
 
     if level_type == gd.memory.LevelType.NULL:
 
@@ -86,7 +92,8 @@ async def main_loop() -> None:
 
         if level_type == gd.memory.LevelType.OFFICIAL:
             level = gd.Level.official(level_id, client=client)
-            level_creator = "RobTop"
+            level_difficulty = level.difficulty
+            level_creator = level.creator
             typeof = "official"
 
         elif level_type == gd.memory.LevelType.EDITOR:
@@ -94,16 +101,17 @@ async def main_loop() -> None:
             typeof = "editor"
 
         else:
-            typeof = "online"
             try:
                 level = await client.get_level(level_id, get_data=False)
-            except gd.ClientException:
-                pass
+            except Exception:  # uwu
+                level = gd.Level(id=level_id, client=client)
+
+            typeof = "online"
 
         details = f"{level_name} ({typeof})"
         state = f"by {level_creator} ({best_record}%)"
 
-        small_image = parse_difficulty(level)
+        small_image = get_image(level_difficulty, level)
         small_text = f"{level_stars}* {level_difficulty}"
 
     await presence.update(
@@ -112,7 +120,7 @@ async def main_loop() -> None:
         details=details,
         start=START,
         large_image="gd",
-        large_text="gd.rpc",
+        large_text=name,
         small_image=small_image,
         small_text=small_text,
     )
