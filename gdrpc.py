@@ -22,6 +22,7 @@ MESSAGES = {
     gd.memory.Scene.ONLINE: "Online",
     gd.memory.Scene.OFFICIAL_LEVELS: "Selecting official level",
 }
+PRECISION = 1
 START = get_timestamp()
 
 
@@ -63,6 +64,7 @@ async def main_loop() -> None:
         name = "Player"
 
     scene = memory.get_scene()
+    current_percent = round(memory.get_percent(), PRECISION)
     best_record = memory.get_normal_percent()
 
     editor_object_count = memory.get_object_count()
@@ -109,7 +111,7 @@ async def main_loop() -> None:
             typeof = "online"
 
         details = f"{level_name} ({typeof})"
-        state = f"by {level_creator} ({best_record}%)"
+        state = f"by {level_creator} ({current_percent}%, best {best_record}%)"
 
         small_image = get_image(level_difficulty, level)
         small_text = f"{level_stars}* {level_difficulty}"
