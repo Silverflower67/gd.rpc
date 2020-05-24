@@ -93,7 +93,7 @@ async def main_loop() -> None:
         if level_type == gd.memory.LevelType.OFFICIAL:
             level = gd.Level.official(level_id, client=client)
             level_difficulty = level.difficulty
-            level_creator = level.creator
+            level_creator = level.creator.name
             typeof = "official"
 
         elif level_type == gd.memory.LevelType.EDITOR:
