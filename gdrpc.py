@@ -3,7 +3,7 @@ import time
 import gd
 import pypresence
 
-__version__ = "0.1.7"
+__version__ = "0.1.8"
 
 
 def get_timestamp() -> int:
@@ -22,7 +22,6 @@ MESSAGES = {
     gd.memory.Scene.ONLINE: "Online",
     gd.memory.Scene.OFFICIAL_LEVELS: "Selecting official level",
 }
-PRECISION = 1
 START = get_timestamp()
 
 
@@ -64,7 +63,7 @@ async def main_loop() -> None:
         name = "Player"
 
     scene = memory.get_scene()
-    current_percent = round(memory.get_percent(), PRECISION)
+    current_percent = memory.get_percent()
     best_record = memory.get_normal_percent()
 
     editor_object_count = memory.get_object_count()
