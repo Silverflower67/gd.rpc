@@ -3,7 +3,7 @@ import time
 import gd
 import pypresence
 
-__version__ = "0.1.8"
+__version__ = "0.1.9"
 
 
 def get_timestamp() -> int:
@@ -45,7 +45,7 @@ def get_image(
     return "-".join(parts)
 
 
-@gd.tasks.loop(seconds=1, loop=LOOP)
+@gd.tasks.loop(seconds=5, loop=LOOP)
 async def main_loop() -> None:
     global START
 
