@@ -112,7 +112,7 @@ async def main_loop() -> None:
 
             typeof = "online"
 
-        details = f"{level_name} ({typeof}, {gamemode.name.lower()})"
+        details = f"{level_name} ({typeof}) <{gamemode.name.lower()}>"
         state = f"by {level_creator} ({current_percent}%, best {best_record}%)"
 
         small_image = get_image(level_difficulty, level)
