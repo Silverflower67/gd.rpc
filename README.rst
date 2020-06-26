@@ -40,9 +40,6 @@ To install the library, you can just run the following command:
 
 .. code:: sh
 
-    # Linux/OS X
-    python3 -m pip install -U gd.rpc
-
     # Windows
     py -3 -m pip install -U gd.rpc
 
@@ -83,7 +80,7 @@ You can build an executable file from the ``gdrpc.py`` file using *pyinstaller*:
 
 .. code:: sh
 
-    $ pyinstaller --onefile --icon=gdrpc.ico gdrpc.py
+    $ pyinstaller --onefile --exclude-module Pillow --exclude-module numpy --exclude-module IPython --exclude-module pycryptodome --exclude-module lxml --icon=gdrpc.ico gdrpc.py
 
 Generated executable will be in ``./dist`` folder.
 

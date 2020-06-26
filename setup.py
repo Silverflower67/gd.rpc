@@ -38,7 +38,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Natural Language :: English",
-        "Operating System :: OS Independent",
+        "Operating System :: Microsoft :: Windows",
     ],
     entry_points={"console_scripts": ["gd.rpc = gdrpc:run"]},
 )

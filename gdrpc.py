@@ -1,9 +1,13 @@
+__title__ = "gdrpc"
+__author__ = "NeKitDS"
+__copyright__ = "Copyright 2020 NeKitDS"
+__license__ = "MIT"
+__version__ = "0.2.0"
+
 import time
 
 import gd
 import pypresence
-
-__version__ = "0.1.9"
 
 
 def get_timestamp() -> int:
