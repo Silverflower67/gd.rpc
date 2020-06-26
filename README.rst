@@ -14,7 +14,7 @@ gd.rpc
     :alt: Required Python Versions
 
 .. image:: https://img.shields.io/pypi/status/gd.rpc.svg
-    :target: https://github.com/NeKitDS/gd.rpc/blob/master/braces
+    :target: https://github.com/NeKitDS/gd.rpc/
     :alt: Project Development Status
 
 .. image:: https://img.shields.io/pypi/dm/gd.rpc.svg
