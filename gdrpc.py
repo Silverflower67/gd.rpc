@@ -2,7 +2,7 @@ __title__ = "gdrpc"
 __author__ = "NeKitDS"
 __copyright__ = "Copyright 2020 NeKitDS"
 __license__ = "MIT"
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 
 import time
 
@@ -69,7 +69,7 @@ async def main_loop() -> None:
     scene = memory.get_scene()
     level_type = memory.get_level_type()
 
-    if level_type == gd.memory.LevelType.NULL:
+    if level_type is gd.api.LevelType.NULL:
 
         if memory.is_in_editor():
 
