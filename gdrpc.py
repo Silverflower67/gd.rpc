@@ -98,13 +98,13 @@ async def main_loop() -> None:
         level_difficulty = memory.get_level_difficulty()
         level_stars = memory.get_level_stars()
 
-        if level_type == gd.memory.LevelType.OFFICIAL:
+        if level_type == gd.api.LevelType.OFFICIAL:
             level = gd.Level.official(level_id, client=client)
             level_difficulty = level.difficulty
             level_creator = level.creator.name
             typeof = "official"
 
-        elif level_type == gd.memory.LevelType.EDITOR:
+        elif level_type == gd.api.LevelType.EDITOR:
             level = gd.Level(client=client)
             typeof = "editor"
 
